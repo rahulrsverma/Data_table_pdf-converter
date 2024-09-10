@@ -1,0 +1,41 @@
+# Install the FPDF library
+!pip install fpdf
+
+from fpdf import FPDF
+
+# Create instance of FPDF class
+pdf = FPDF()
+
+# Add a page
+pdf.add_page()
+
+# Set title
+pdf.set_font("Arial", 'B', 16)
+pdf.cell(200, 10, txt="Table Data in PDF", ln=True, align='C')
+
+# Line break
+pdf.ln(10)
+
+# Table Data
+data = [
+    ["No.", "Name", "Age", "City"],
+    [1, "John Doe", 28, "New York"],
+    [2, "Jane Smith", 32, "Los Angeles"],
+    [3, "Sam Johnson", 45, "Chicago"],
+    [4, "Anna Brown", 23, "Houston"]
+]
+
+# Set font for table content
+pdf.set_font("Arial", size=12)
+
+# Add table to PDF
+for row in data:
+    for item in row:
+        pdf.cell(40, 10, str(item), border=1)
+    pdf.ln()
+
+# Save the PDF
+output_path = "/content/table_data.pdf"
+pdf.output(output_path)
+
+print(f"PDF file created: {output_path}")
